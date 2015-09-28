@@ -1,0 +1,14 @@
+{
+  "name": "@mubaloo/chirp",
+  "version": "0.0.1",
+  "description": "Randomly send test data via HTTP and MQTT",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tom Hallam",
+  "license": "ISC",
+  "dependencies": {
+    "mqtt": "^1.4.1"
+  }
+}
