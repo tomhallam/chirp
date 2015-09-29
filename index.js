@@ -18,7 +18,7 @@ chirpArgs
     .option('-p, --port [port]')
     .option('-P, --protocol [protocol]', 'Protocol to use (http|mqtt) (default: http)', 'http')
     .option('-u --url [url]', 'Required for HTTP only. The URL to send the data to.')
-    .option('-t, --template [templateLocation]', 'Template to use (default: templates/default.js)', './templates/default.js')
+    .option('-t, --template [templateLocation]', 'Template to use (default: ./templates/default.js)', './templates/default.js')
     .option('-r, --rangeInterval <a>..<b>', 'Interval range in milliseconds', rangeSplit)
     .option('-T, --topic [topic]', '(MQTT only, the topic)')
     .option('-m, --method [method]', '(HTTP only, the method. Default is PUT)', 'put')
