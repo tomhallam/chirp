@@ -25,6 +25,12 @@ chirp is presented as a command line program. Install as follows:
         -m, --method [method]              (HTTP only, the method. Default is PUT)
         -v, --verbose                      Show verbose output
     
+## Examples
+    
+    chirp-generator --protocol http --rangeInterval 0,1000 --url http://localhost:3000/resources/hello -v
+    chirp-generator --protocol mqtt --rangeInterval 0,10000 --topic fridge
+    chirp-generator --protocol mqtt --rangeInterval 0,10000 --topic fridge --template ./fridgeData.js
+    
 ## Templates     
 
 Templates are used to mock the data you're sending to the server. They are interpreted as Javascript on each request
