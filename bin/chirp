@@ -1,8 +1,6 @@
 #!/usr/bin/env node
 
 var chirpArgs = require('commander');
-var mqtt = require('mqtt');
-var request = require('request');
 var debug = require('debug')('chirp');
 
 var HttpClient = require('../clients/http');
