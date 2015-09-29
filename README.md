@@ -8,7 +8,7 @@ chirp is presented as a command line program. Install as follows:
     
 ## Usage
     
-      Usage: chirp [options]
+      Usage: chirp-generator [options]
     
       Options:
     
