@@ -1,10 +1,12 @@
-# Chirp
+# :hen: Chirp
 [![npm version](https://badge.fury.io/js/chirp-generator.svg)](http://badge.fury.io/js/chirp-generator)
 
 This project was borne out of my need to send arbitrary data at random intervals to servers that speak MQTT and HTTP
 to test an IoT system.
 
-chirp is presented as a command line program. Install as follows:
+Chirp is presented as a command line program.
+
+## Installation
 
     npm install -g chirp-generator
     
