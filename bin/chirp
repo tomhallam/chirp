@@ -5,8 +5,8 @@ var mqtt = require('mqtt');
 var request = require('request');
 var debug = require('debug')('chirp');
 
-var HttpClient = require('./clients/http');
-var MqttClient = require('./clients/mqtt');
+var HttpClient = require('../clients/http');
+var MqttClient = require('../clients/mqtt');
 
 // Set up based on command line input
 function rangeSplit(val) {
