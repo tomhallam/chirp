@@ -1,5 +1,5 @@
 {
-  "name": "@mubaloo/chirp",
+  "name": "@tomhallam/chirp",
   "version": "0.0.1",
   "description": "Randomly send test data via HTTP and MQTT",
   "main": "index.js",
@@ -9,6 +9,9 @@
   "author": "Tom Hallam",
   "license": "ISC",
   "dependencies": {
-    "mqtt": "^1.4.1"
+    "commander": "^2.8.1",
+    "debug": "^2.2.0",
+    "mqtt": "^1.4.1",
+    "request": "^2.64.0"
   }
 }
