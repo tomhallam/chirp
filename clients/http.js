@@ -1,29 +1,45 @@
-var mqtt = require('mqtt');
+var request = require('request');
 var util = require('util');
 var EventEmitter = require("events");
+var debug = require('debug')('chirp:http');
 
-module.exports = MqttClient;
-util.inherits(MqttClient, EventEmitter);
+module.exports = HttpClient;
+util.inherits(HttpClient, EventEmitter);
 
 /**
- * Create a new instance of the Chirp MQTT Client
+ *
  * @param host
  * @param port
  * @param forceJSON
  * @constructor
  */
-function MqttClient(host, port, forceJSON) {
+function HttpClient(url, method, verbose) {
 
+    var self = this;
+
+    // Sanitise the host if not already
+    if(url.indexOf('http://') === -1) {
+        url = 'http://' + url;
+    }
+
+    this.url = url;
+    this.method = method;
+    this.verbose = verbose;
+
+    setTimeout(function() {
+        self.emit('connected');
+    }, 100)
 
 }
 
 /**
  * Set the submitted payload
  * @param payload
- * @returns {MqttClient}
+ * @returns {HttpClient}
  */
-MqttClient.prototype.setPayload = function(payload) {
+HttpClient.prototype.setPayload = function(payload) {
 
+    debug('Setting payload to %o', payload)
     this.payload = payload;
     return this;
 
@@ -31,10 +47,23 @@ MqttClient.prototype.setPayload = function(payload) {
 
 /**
  *
- * @returns {MqttClient}
+ * @returns {HttpClient}
  */
-MqttClient.prototype.send = function() {
+HttpClient.prototype.send = function() {
 
-    return this.client.publish(this.topic, this.payload);
+    var self = this;
+    return request({url: this.url, method: this.method, json: this.payload}, function result(error, response, body) {
+        if(error) {
+            console.error(error);
+        }
+        else {
+            if(self.verbose) {
+                console.log(body);
+            }
+            else {
+                debug(body);
+            }
+        }
+    });
 
 };

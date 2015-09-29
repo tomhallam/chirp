@@ -3,7 +3,7 @@ var mqtt = require('mqtt');
 var request = require('request');
 var debug = require('debug')('chirp');
 
-//var HttpClient = require('./clients/http');
+var HttpClient = require('./clients/http');
 var MqttClient = require('./clients/mqtt');
 
 // Set up based on command line input
@@ -11,14 +11,18 @@ function rangeSplit(val) {
     return val.split(',');
 }
 
+// Set up the command line options
 chirpArgs
     .version(require('./package.json').version)
     .option('-h, --host [hostname]', 'Host to connect to' , 'localhost')
     .option('-p, --port [port]')
     .option('-P, --protocol [protocol]', 'Protocol to use (http|mqtt) (default: http)', 'http')
+    .option('-u --url [url]', 'Required for HTTP only. The URL to send the data to.')
     .option('-t, --template [templateLocation]', 'Template to use (default: templates/default.js)', './templates/default.js')
     .option('-r, --rangeInterval <a>..<b>', 'Interval range in milliseconds', rangeSplit)
     .option('-T, --topic [topic]', '(MQTT only, the topic)')
+    .option('-m, --method [method]', '(HTTP only, the method. Default is PUT)', 'put')
+    .option('-v, --verbose', 'Show verbose output')
     .parse(process.argv);
 
 // Sanity checking
@@ -31,14 +35,19 @@ if(chirpArgs.protocol === 'mqtt' && !chirpArgs.topic) {
     process.exit(0);
 }
 
+if(chirpArgs.protocol === 'http' && !chirpArgs.url) {
+    console.error('You must set a URL if you are using the HTTP protocol.');
+    process.exit(0);
+}
+
 var client = {};
 
 switch(chirpArgs.protocol) {
     case 'http':
-        client = new HttpClient(chirpArgs.host, chirpArgs.port, chirpArgs.topic);
+        client = new HttpClient(chirpArgs.url, chirpArgs.method, chirpArgs.verbose);
         break;
     case 'mqtt':
-        client = new MqttClient(chirpArgs.host, chirpArgs.port, chirpArgs.topic);
+        client = new MqttClient(chirpArgs.host, chirpArgs.port, chirpArgs.topic, chirpArgs.verbose);
         break;
     default:
         console.error('Invalid protocol selection. Supported protocols are http or mqttt');
@@ -59,6 +68,7 @@ client.on('connected', function() {
     eventLoop();
 });
 
+// The event loop
 function eventLoop() {
 
     function doRequest() {
