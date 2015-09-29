@@ -1,4 +1,5 @@
 # Chirp
+[![npm version](https://badge.fury.io/js/chirp-generator.svg)](http://badge.fury.io/js/chirp-generator)
 
 This project was borne out of my need to send arbitrary data at random intervals to servers that speak MQTT and HTTP
 to test an IoT system.
