@@ -1,6 +1,6 @@
 {
   "name": "chirp-generator",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Randomly send test data via HTTP and MQTT",
   "main": "bin/chirp",
   "bin": {
