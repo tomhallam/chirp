@@ -8,4 +8,4 @@ chirp is presented as a command line program. Install as follows:
     
 ## Usage
     
-## Templates    
+## Templates     
